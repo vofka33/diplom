@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div id="content">
+      <div class="centrator">
+        <section>
+  <div class="line">
+    <span class="title">
+      Общая информация
+    </span>
+  </div>
+  <div class="line">
+    <div class="column">
+      <div class="search_result">
+        <div class="result_info">
+          <span>Добро пожаловать, {{request.user.username}}!</span>
+        </div>
+        <div class="result_info">
+          <span>Вы действительно хотите удалить данные из списка?</span>
+        </div>
+        <div class="search_result">
+        <div class="result_info">
+
+        </div>
+      </div>
+        <div class="result_collection">
+          <table>
+            <tbody><tr>
+              <th class="nam left">Название</th>
+              <th class="nam left">Описание</th>
+            </tr>
+            <tr>
+              <td class="nam left">{{transmissionmodel.name}}</td>
+              <td class="nam left">{{transmissionmodel.description}}</td>
+              </td>
+            </tr>
+          </tbody></table>
+          <div class="tabs">
+                    <div class="tabs">
+                        <form method="POST">
+                        {% csrf_token %}
+                        <input class="tab" type="submit" value="подтвердить">
+                        </form>
+                    </div>
+                </div>
+        </div>
+      </div>
+    </div>
+  </div>
+        </section>
+      </div>
+    </div>
+{% endblock content %}
+

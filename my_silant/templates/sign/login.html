@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div id="content">
+    <div class="centrator">
+        <section>
+            <div class="log_form">
+                <h2> Войти в систему </h2>
+                <br>
+                <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <table>
+                <tr>
+                    <td>{{ form.username.label_tag }}</td>
+                    <td>{{ form.username }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.password.label_tag }}</td>
+                    <td>{{ form.password }}</td>
+                </tr>
+                </table>
+                <input type="submit" class="log_button" value="Войти">
+                </form>
+            </div>
+        </section>
+</div>
+</div>
+
+{% endblock content %}

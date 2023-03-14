@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>My Silant</title>
+    <meta name="viewport" content="width=device-width; initial-scale=1">
+    <meta name="csrf-param" content="authenticity_token">
+    <meta name="csrf-token" content="-dcNdZ5G4WIKAHhCrD0vBLrJGXvL6ySZynoJiTkTk12qV3w7n3uyiW-ZoH3l0WiXTGuWPpgMch3fBxndBuH4-Q">
+    {% load static %}
+
+    <link rel="stylesheet" media="all" href="{% static 'css/style.css' %}">
+
+  <body>  
+    <header>
+      <div class="centrator">
+        <div class="top">
+               <div class="toplogo">
+                  <a href="http://127.0.0.1:8000/"><img src="{% static '/images/Logotype RGB.svg' %}" width="250px"></a>
+              </div>
+
+             <div class="contacts_top" class="p-l-2">
+              <a href="tel:+7-8352-20-12-09">+7-8352-20-12-09</a>
+              <a href="http://127.0.0.1:8000/"><img src="{% static '/images/telegram.svg' %}" width=25  heght=25></a>
+            </div>
+
+              {% if is_aut %}
+                 <div class="auth_widget"><a href="/sign/logout/">Выход</a></div>
+              {% else %}
+                  <div class="auth_widget"><a href="/sign/login/">Авторизация</a></div>
+              {% endif %}
+
+        </div>
+          <div class="project_name">
+            <h1>Электронная сервисная книжка «Мой силант»</h1>
+          </div>
+      </div>
+    </header>
+    {% block content %}
+    {% endblock content %}
+    <footer>
+      <div class="contacts_footer">
+          <a href="tel:+7-8352-20-12-09">+7-8352-20-12-09</a>
+          <a href="http://127.0.0.1:8000/"><img src="{% static '/images/telegram.svg' %}" width=15  heght=15></a>
+      </div>
+        <div class="copyright">
+          Мой Силант 2023
+        </div>
+    </footer>

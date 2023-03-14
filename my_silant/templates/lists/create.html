@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div id="content">
+      <div class="centrator">
+        <section>
+  <div class="line">
+    <span class="title">
+      Проверьте комплектацию и технические характеристики техники Силант
+    </span>
+  </div>
+  <div class="line">
+  </div>
+    <div class="column">
+      <div class="search_result">
+
+        <div class="result_info">
+          <span>Добро пожаловать, {{request.user.username}}!</span>
+        </div>
+        <div class="result_info">
+          <span>Внесите данные в список</span>
+        </div>
+        <div class="result_collection">
+          <div class="search_result">
+            <div class="result_info">
+              <div class="result_collection">
+                <form method="POST">
+                  {% csrf_token %}
+                  {{ form }}
+                  <div class="tabs">
+                    <input class="tab" type="submit" value="Добавить">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+        </section>
+      </div>
+</div>
+
+{% endblock content %}
+
+

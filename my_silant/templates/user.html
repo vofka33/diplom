@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div id="content">
+      <div class="centrator">
+        <section>
+  <div class="line">
+    <span class="title">
+      Проверьте комплектацию и технические характеристики техники Силант
+    </span>
+  </div>
+  <div class="line">
+      <div class="search_result">
+      <div class="result_info">
+        <div class="result_collection">
+            <form method="GET">
+              {{ filter.form }}
+                <div class="tabs">
+                <input class="tab" type="submit" value="Фильтр">
+                </div>
+            </form>
+      </div>
+    </div>
+  </div>
+    <div class="column">
+      <div class="search_result">
+        {% if is_aut %}
+        <div class="result_info">
+          <span>Добро пожаловать, {{request.user.username}}!</span>
+        </div>
+        <div class="result_info">
+          <span>Информация о коплектации и технических характеристиках вашей техники</span>
+        </div>
+        <div class="result_collection">
+          <div class="tabs">
+            <a href="/user/">
+            <div class="tab active">
+              <span>
+                Общая информация
+              </span>
+            </div>
+            </a>
+            <a href="/to/">
+              <div class="tab">
+              <span>
+                ТО
+              </span>
+            </div>
+            </a>
+            <a href="/complaint/">
+            <div class="tab">
+              <span>
+                Рекламации
+              </span>
+            </div>
+            </a>
+             {% if is_manager == 'Менеджер' %}
+            <a href="/servisecomp/">
+            <div class="tab">
+              <span>
+                Списки
+              </span>
+            </div>
+            </a>
+            {% endif %}
+          </div>
+        </div>
+        <div class="result_collection">
+          <table>
+            <tbody><tr>
+              <th class="nam left">Зав. № машины</th>
+              <th class="nam left">Модель техники</th>
+              <th class="nam left">Модель двигателя</th>
+              <th class="nam left">Зав. № двигателя</th>
+              <th class="nam left">Модель трансмиссии</th>
+              <th class="nam left">Зав. № трансмиссии</th>
+              <th class="nam left">Модель ведущего моста</th>
+              <th class="nam left">Зав. № ведущего моста</th>
+              <th class="nam left">Модель управляемого моста</th>
+              <th class="nam left">Зав. № управляемого моста</th>
+              <th class="nam left">Дата отгрузки с завода</th>
+              <th class="nam left">Клиент</th>
+              <th class="nam left">Сервисная компания</th>
+              <th class="nam left">Детали</th>
+            </tr>
+            {% for m in filter.qs %}
+            {% if m.client == request.user.first_name or m.service_company.name == request.user.first_name or is_manager == 'Менеджер' %}
+            <tr id="myUL">
+              <td class="nam left">{{m.number_machine}}</td>
+              <td class="nam left">{{m.technique_model}}</td>
+              <td class="nam left">{{m.engine_model}}</td>
+              <td class="nam left">{{m.engine_number}}</td>
+              <td class="nam left">{{m.transmission_model}}</td>
+              <td class="nam left">{{m.transmission_number}}</td>
+              <td class="nam left">{{m.drive_axle_model}}</td>
+              <td class="nam left">{{m.drive_axle_number}}</td>
+              <td class="nam left">{{m.steering_bridge_model}}</td>
+              <td class="nam left">{{m.steering_bridge_number}}</td>
+              <td class="nam left">{{m.shipping_date}}</td>
+              <td class="nam left">{{m.client}}</td>
+              <td class="nam left">{{m.service_company}}</td>
+              <td class="nam left">
+                <div class="tabs">
+                  <a href="{% url 'machine_detail' m.pk %}">
+                    <div class="tab active">
+                      <span>
+                        <div class="smalltext">детали</div>
+                      </span>
+                    </div>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+          </tbody></table>
+          {% if machine == 'К сожалению Ваша техника отсутствует в базе :(' %}
+          <div class="search_result empty_result">
+            <span>
+              {{ machine }}
+            </span>
+          </div>
+          {% endif %}
+          {% else %}
+          <div class="search_result empty_result">
+            <span>
+              Для просмотра страницы необходима автризация
+            </span>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+        </section>
+      </div>
+    </div>
+{% endblock content %}
+

@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div id="content">
+      <div class="centrator">
+        <section>
+  <div class="line">
+    <span class="title">
+      Проверьте комплектацию и технические характеристики техники Силант
+    </span>
+  </div>
+  <div class="line">
+    <div class="search_result">
+      <div class="result_info">
+        <div class="result_collection">
+            <form method="GET">
+              {{ filter.form }}
+                <div class="tabs">
+                <input class="tab" type="submit" value="Фильтр">
+                </div>
+            </form>
+      </div>
+    </div>
+  </div>
+    <div class="column">
+      <div class="search_result">
+        <div class="result_info">
+          <span>Добро пожаловать, {{request.user.username}}!</span>
+        </div>
+        <div class="result_info">
+          <span>Информация о коплектации и технических характеристиках вашей техники</span>
+        </div>
+        <div class="result_collection">
+          <div class="tabs">
+            <a href="/user/">
+            <div class="tab">
+              <span>
+                Общая информация
+              </span>
+            </div>
+            </a>
+            <a href="/to/">
+              <div class="tab">
+              <span>
+                ТО
+              </span>
+            </div>
+            </a>
+            <a href="/complaint/">
+            <div class="tab active">
+              <span>
+                Рекламации
+              </span>
+            </div>
+            </a>
+            {% if is_manager == 'Менеджер' %}
+            <a href="/servisecomp/">
+            <div class="tab">
+              <span>
+                Списки
+              </span>
+            </div>
+            </a>
+            {% endif %}
+          </div>
+        </div>
+        <div class="result_collection">
+          <table>
+            <tbody><tr>
+              <th class="nam left">Дата отказа</th>
+              <th class="nam left">Наработка, м/час</th>
+              <th class="nam left">Узел отказа</th>
+              <th class="nam left">Описание отказа</th>
+              <th class="nam left">Способ восстановления</th>
+              <th class="nam left">Используемые запасные части</th>
+              <th class="nam left">Дата восстановления</th>
+              <th class="nam left">Зав. № машины</th>
+              <th class="nam left">Сервисная компания</th>
+              <th class="nam left">Детали</th>
+            {% for c in filter.qs %}
+            <tr>
+              <td class="nam left">{{c.date_rejection}}</td>
+              <td class="nam left">{{c.operating_time}}</td>
+              <td class="nam left">{{c.failure_node}}</td>
+              <td class="nam left">{{c.failure_description}}</td>
+              <td class="nam left">{{c.recovery_method}}</td>
+              <td class="nam left">{{c.spare_parts}}</td>
+              <td class="nam left">{{c.recovery_date}}</td>
+              <td class="nam left">{{c.machine_complaint}}</td>
+              <td class="nam left">{{c.service_company_complaint}}</td>
+              <td class="nam left">
+                <div class="tabs">
+                  <a href="{% url 'complaint_detail' c.pk %}">
+                    <div class="tab active">
+                      <span>
+                        <div class="smalltext">детали</div>
+                      </span>
+                    </div>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            </tr>
+            {% endfor %}
+          </tbody></table>
+      </div>
+      </div>
+    </div>
+  </div>
+        </section>
+      </div>
+    </div>
+{% endblock content %}
+
